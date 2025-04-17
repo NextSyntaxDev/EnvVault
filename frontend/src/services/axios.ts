@@ -4,7 +4,7 @@ import { parseCookies, destroyCookie } from "nookies";
 import { toast } from "react-toastify";
 
 export const api = axios.create({
-  baseURL: "",
+  baseURL: "http://localhost:8080",
 });
 
 api.interceptors.request.use(

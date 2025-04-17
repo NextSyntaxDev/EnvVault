@@ -56,7 +56,7 @@ export default function EnvVariablesManager() {
         <div className="flex gap-4">
           <Button
             onClick={() => setIsCreateDialogOpen(true)}
-            className="bg-primary hover:bg-gray-600 transition-colors duration-300"
+            className="bg-green-600 hover:bg-green-400 transition-colors duration-300"
           >
             <PlusIcon className="h-4 w-4 mr-2" />
             Criar
