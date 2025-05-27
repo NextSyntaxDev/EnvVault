@@ -56,6 +56,7 @@ public class SecurityConfigurations {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
+        // Trocar pelo ip da maquina que vai rodar o front
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedMethod(HttpMethod.POST);
         configuration.addAllowedMethod(HttpMethod.GET);
