@@ -1,17 +1,30 @@
 #!/bin/sh
 
-CERT_PATH=/cert/fullchain.pem
-KEY_PATH=/cert/privkey.pem
+CERT_DIR="./cert"
+KEY_FILE="$CERT_DIR/privkey.pem"
+CERT_FILE="$CERT_DIR/fullchain.pem"
+DAYS_VALID=365
 
-if [ ! -f "$CERT_PATH" ] || [ ! -f "$KEY_PATH" ]; then
-  echo "🔐 Gerando certificado autoassinado como fullchain.pem e privkey.pem..."
-  openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout "$KEY_PATH" \
-    -out "$CERT_PATH" \
-    -subj "/C=BR/ST=SP/L=SaoPaulo/O=MyCompany/OU=Dev/CN=localhost"
-else
-  echo "✅ Certificado já existe. Pulando geração."
+mkdir -p "$CERT_DIR"
+
+if [[ -f "$KEY_FILE" && -f "$CERT_FILE" ]]; then
+    echo " ^|^e Certificado j   existe em $CERT_DIR. Pulando gera    o."
+    exit 0
 fi
 
-# Inicia o Nginx
-nginx -g 'daemon off;'
+echo " ^=^t^p Gerando certificado SSL autoassinado..."
+
+openssl req -x509 -nodes -days $DAYS_VALID \
+  -newkey rsa:2048 \
+  -keyout "$KEY_FILE" \
+  -out "$CERT_FILE" \
+  -subj "/C=BR/ST=SP/L=Localhost/O=Dev/OU=Dev/CN=localhost"
+
+if [[ -f "$KEY_FILE" && -f "$CERT_FILE" ]]; then
+    echo " ^|^e Certificado criado com sucesso:"
+    echo "   - Chave privada: $KEY_FILE"
+    echo "   - Certificado (fullchain): $CERT_FILE"
+else
+    echo " ^}^l Falha ao gerar o certificado."
+    exit 1
+fi
