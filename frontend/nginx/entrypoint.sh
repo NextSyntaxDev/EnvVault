@@ -1,4 +1,3 @@
-#!/bin/sh
 CERT_PATH=/cert/fullchain.pem
 KEY_PATH=/cert/privkey.pem
 
