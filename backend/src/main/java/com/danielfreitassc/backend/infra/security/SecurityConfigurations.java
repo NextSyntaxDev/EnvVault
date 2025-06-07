@@ -58,6 +58,7 @@ public class SecurityConfigurations {
         configuration.setAllowCredentials(true);
         // Trocar pelo ip da maquina que vai rodar o front
         configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedOrigin("https://localhost:7777");
         configuration.addAllowedMethod(HttpMethod.POST);
         configuration.addAllowedMethod(HttpMethod.GET);
         configuration.addAllowedMethod(HttpMethod.PUT);
