@@ -11,7 +11,9 @@ services:
 
   nginx:
     container_name: nginx
-    image: nginx:1.27.4
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
